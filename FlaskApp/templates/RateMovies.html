@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Rate Movies</title>
+	<link rel="stylesheet" href="../static/bootstrap.min.css">
+	<script src="../static/bootstrap.min.js"></script>
+	<script src="../static/jquery-3.2.0.min.js"></script>
+	<script src="../static/chosen.jquery.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="../static/chosen.min.css">
+	<style>
+		body{
+			
+			background-image: url("../static/Images/Background.jpg");
+		}
+		form { 
+			text-align: center;
+		}
+		.flex-container {
+			padding: 0;
+			margin: auto;
+			list-style: none;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+		.longhand {
+			flex-flow: wrap row;
+		}
+		.flex-item {
+			color: #414141;
+			border: 1px solid #A6A4A4;
+			width: 50px;
+			height: 50px;
+			font-size: 1.2em;
+			text-align: center;
+			padding: 4px;
+		}
+		.label-class {
+			height: 100%;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+		input[type=radio]:checked + label {
+			background: #068F93;
+		}
+		input[type=radio] {
+			display: none;
+		}
+	</style>
+</head>
+<body>
+	<script type="text/javascript">
+		$(function() {
+    		$(".chzn-select").chosen();
+		});
+	</script>
+	<nav class="navbar navbar-inverse">
+	  	<div class="container-fluid">
+		    <div class="navbar-header">
+		      	<a class="navbar-brand" href="#">Movie Recommendation System</a>
+		    </div>
+		    <ul class="nav navbar-nav">
+		      	<li><a href="movieList" target="_blank">Movie List</a></li>
+		      	<li><a href="ratedList" target="_blank">Rated Movies</a></li>
+		    </ul>
+	    	{% if flag %}
+				<a class="btn btn-danger navbar-btn" role="button" disabled>Get Recommendations</a>
+			{% else %}
+				<a class="btn btn-danger navbar-btn" href="genRec" target="_blank" role="button">Get Recommendation</a>
+			{% endif %}
+	    </div>
+	</nav>
+	<p align="center" class="small" style="font-family:Arial; margin-top: 8.5em; margin-bottom: 0em; font-size:175%; color: white">WHY  DON'T  YOU</p>
+
+	<p align="center" class="small" style="font-family:Arial; font-size:350%; color: white">RATE  SOME  MOVIES?</p> 
+	<form action="">
+		<select class="chzn-select" name="title">
+			{% for i in items %}
+				<option value={{i.id}}>{{i.title}}</option>
+			{% endfor %}
+		</select>
+		<br><br>
+		<ul class="flex-container longhand">
+			<li class="flex-item"><input type="radio" id="one" name="rating" value="1"><label class="label-class" for="one">1</label></li>
+			<li class="flex-item"><input type="radio" id="two" name="rating" value="2"><label class="label-class" for="two">2</label></li>
+			<li class="flex-item"><input type="radio" id="three" name="rating" value="3"><label class="label-class" for="three">3</label></li>
+			<li class="flex-item"><input type="radio" id="four" name="rating" value="4"><label class="label-class" for="four">4</label></li>
+			<li class="flex-item"><input type="radio" id="five" name="rating" value="5"><label class="label-class" for="five">5</label></li>
+		</ul>
+		<br><br>
+		<input type="Submit" class="btn btn-danger" value="Rate">
+		<br><br>
+		<input type="Submit" formaction="similarMovies" formtarget="_blank" class="btn btn-danger" value="Find Similar Movies">
+	</form>
+</body>
+</html>
